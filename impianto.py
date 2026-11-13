@@ -23,8 +23,11 @@ class ImpiantoSolare:
             if p.codice == pannello.codice:
                 raise ValueError("Codice duplicato")
             
-        potenzaTot = ImpiantoSolare.potenza_pannelli()
-        if self.potenza_massima_kw < potenzaTot + pannello.potenza_kw:
+        result = 0
+        for pannello in self.pannelli:
+            result += pannello.potenza_kw
+        
+        if self.potenza_massima_kw < result + pannello.potenza_kw:
             raise ValueError("Potenza massima superata")
         
         self.pannelli.append(pannello)
